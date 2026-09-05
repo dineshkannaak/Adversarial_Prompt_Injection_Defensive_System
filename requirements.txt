@@ -1,0 +1,11 @@
+transformers
+torch
+gradio
+groq
+scikit-learn
+pandas
+numpy
+plotly
+spaces
+pyarrow
+openpyxl
