@@ -254,13 +254,9 @@ spaces
 
 ## Running the Application
 
-The canonical development entry point is `app_rapid_zenith_v29.py`:
+For a platform that requires `app.py`, configure the platform entry point to launch `app.py` or create a deployment copy named `app.py`. Model paths are resolved relative to the application working directory.
 
-```bash
-python app_rapid_zenith_v29.py
-```
-
-For a platform that requires `app.py`, configure the platform entry point to launch `app_rapid_zenith_v29.py` or create a deployment copy named `app.py`. Model paths are resolved relative to the application working directory.
+Model checkpoint (best_model.pt, 262MB) is hosted on Hugging Face due to GitHub's file size limits: best_model.pt
 
 ## Training and Evaluation
 
