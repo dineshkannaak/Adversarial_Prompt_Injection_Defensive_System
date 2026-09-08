@@ -7,6 +7,7 @@ pandas
 numpy
 plotly
 spaces
+uvicorn
 pyarrow
 openpyxl
 huggingface_hub
