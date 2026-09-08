@@ -2,7 +2,7 @@ import os
 import torch
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-
+HF_MODEL_REPO="https://huggingface.co/spaces/dk7706/Adversarial_Prompt_Injection_Defensive_System"
 # Hugging Face ZeroGPU Support
 try:
     import spaces
@@ -39,19 +39,23 @@ def load_model():
     
     try:
         # Step 1: Check for best_model.pt (State Dict)
-        if os.path.exists(BEST_MODEL_FILE):
-            print(f"Loading fine-tuned weights from {BEST_MODEL_FILE}...")
+        if HF_MODEL_REPO:
+            print(f"Loading fine-tuned weights from  HF Hub:{HF_MODEL_REPO}")
             model = AutoModelForSequenceClassification.from_pretrained(
                 DEFAULT_MODEL, 
                 num_labels=2,
                 attn_implementation="eager"
+            )
+            weights_path=hf_hub_download(
+                repo_id=HF_MODEL_REPO,
+                filename=BEST_MODEL_FILE,
+                token=os.environ.get("HF_TOKEN")
             )
             # Load weights (map to CPU first to avoid ZeroGPU init issues during load)
             state_dict = torch.load(BEST_MODEL_FILE, map_location="cpu")
             model.load_state_dict(state_dict)
             model.to(device)
             model.eval()
-            print("Successfully loaded best_model.pt")
             return True
             
         # Step 2: Check for model_output directory
