@@ -50,6 +50,7 @@ def load_model():
             weights_path=hf_hub_download(
                 repo_id=HF_MODEL_REPO,
                 filename=BEST_MODEL_FILE,
+                repo_type="space",
                 token=os.environ.get("HF_TOKEN")
             )
             # Load weights (map to CPU first to avoid ZeroGPU init issues during load)
