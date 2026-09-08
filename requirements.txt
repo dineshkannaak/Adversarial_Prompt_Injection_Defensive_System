@@ -9,3 +9,4 @@ plotly
 spaces
 pyarrow
 openpyxl
+huggingface_hub
