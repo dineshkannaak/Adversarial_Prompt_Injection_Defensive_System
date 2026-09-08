@@ -1,8 +1,9 @@
 import os
 import torch
 import numpy as np
+from huggingface_hub import hf_hub_download
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-HF_MODEL_REPO="https://huggingface.co/spaces/dk7706/Adversarial_Prompt_Injection_Defensive_System"
+HF_MODEL_REPO="dk7706/Adversarial_Prompt_Injection_Defensive_System"
 # Hugging Face ZeroGPU Support
 try:
     import spaces
@@ -52,7 +53,7 @@ def load_model():
                 token=os.environ.get("HF_TOKEN")
             )
             # Load weights (map to CPU first to avoid ZeroGPU init issues during load)
-            state_dict = torch.load(BEST_MODEL_FILE, map_location="cpu")
+            state_dict = torch.load(weights_path, map_location="cpu")
             model.load_state_dict(state_dict)
             model.to(device)
             model.eval()
